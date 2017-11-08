@@ -1,4 +1,4 @@
 New user was created.
- <%= "=" * (@user.email + 12) %>
+ <%= "=" * (@user.email.length + 12) %>
 
- email: <%= @comment.user.name %>
+ email: <%= @user.email %>

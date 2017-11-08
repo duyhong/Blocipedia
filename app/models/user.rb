@@ -9,6 +9,6 @@ class User < ApplicationRecord
   private
 
   def send_new_user_emails
-    SignUpMailer.new_user.deliver_now
+    SignUpMailer.new_user(self).deliver_now
   end
 end
