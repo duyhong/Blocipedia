@@ -49,6 +49,7 @@ group :development, :test do
   gem 'faker'
   gem 'factory_girl_rails'
   gem 'pry-rails'
+  gem 'mailcatcher'
 end
 
 group :development do
