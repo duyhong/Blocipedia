@@ -15,10 +15,11 @@ class WikisController < ApplicationController
    end
 
    def create
-     @wiki = Wiki.new
-     @wiki.title = params[:title]
-     @wiki.body = params[:body]
-     @wiki.private = params[:private]
+     @wiki = Wiki.new(wiki_params)
+     # @wiki.assign_attributes(wiki_params)
+     # @wiki.title = params[:wiki][:title]
+     # @wiki.body = params[:wiki][:body]
+     # @wiki.private = params[:wiki][:private]
      # @user = User.find(params[:user_id])
      @wiki.user = current_user # @user
 
