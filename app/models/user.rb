@@ -5,7 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
 
+  after_initialize { self.role ||= :standard }
+
   after_create :send_new_user_emails
+
+  enum role: [:standard, :premium, :admin]
 
   private
 
