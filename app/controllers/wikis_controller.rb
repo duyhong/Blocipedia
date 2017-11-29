@@ -64,7 +64,11 @@ class WikisController < ApplicationController
    # remember to add private methods to the bottom of the file. Any method defined below private, will be private.
    private
    def wiki_params
-     params.require(:wiki).permit(:title, :body, :private)
+     if deleting_private
+       params.require(:wiki).permit(:title, :body, :private)
+     else
+       params.require(:wiki).permit(:title, :body)
+     end
    end
 
    # def authorize_user
