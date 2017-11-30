@@ -15,7 +15,7 @@ class ApplicationPolicy
   end
 
   def create?
-    false
+    user.present?
   end
 
   def new?
@@ -50,4 +50,5 @@ class ApplicationPolicy
       scope
     end
   end
+
 end

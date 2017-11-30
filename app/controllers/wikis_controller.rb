@@ -15,7 +15,7 @@ class WikisController < ApplicationController
    end
 
    def create
-     @wiki = Wiki.new(wiki_params)
+     @wiki = Wiki.new(params_for_create)
      # @wiki.assign_attributes(wiki_params)
      # @wiki.title = params[:wiki][:title]
      # @wiki.body = params[:wiki][:body]
@@ -38,10 +38,11 @@ class WikisController < ApplicationController
 
    def update
      @wiki = Wiki.find(params[:id])
-     authorize @wiki
-     @wiki.assign_attributes(wiki_params)
+     # authorize @wiki
+     # @wiki.assign_attributes(wiki_params)
 
-     if @wiki.save
+     # if @wiki.save
+     if @wiki.update_attributes(wiki_params)
        flash[:notice] = "Wiki was updated."
        redirect_to @wiki
      else
@@ -52,6 +53,7 @@ class WikisController < ApplicationController
 
    def destroy
      @wiki = Wiki.find(params[:id])
+     authorize @wiki
      if @wiki.destroy
        flash[:notice] = "\"#{@wiki.title}\" was deleted successfully."
        redirect_to action: :index
@@ -61,15 +63,25 @@ class WikisController < ApplicationController
      end
    end
 
+   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
    # remember to add private methods to the bottom of the file. Any method defined below private, will be private.
    private
-   def wiki_params
-     if deleting_private
-       params.require(:wiki).permit(:title, :body, :private)
-     else
-       params.require(:wiki).permit(:title, :body)
-     end
+
+   def params_for_create
+     params.require(:wiki).permit(:title, :body, :private)
    end
+
+   def wiki_params
+     params.require(:wiki).permit(policy(@wiki).permitted_attributes)
+   end
+
+    def user_not_authorized(exception)
+      wiki_policy = exception.policy.class.to_s.underscore
+
+      flash[:error] = t "#{wiki_policy}.#{exception.query}", scope: "pundit", default: :default
+      redirect_to(request.referrer || root_path)
+    end
 
    # def authorize_user
    #   wiki = Wiki.find(params[:id])
