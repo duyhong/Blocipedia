@@ -3,15 +3,6 @@ class WikiPolicy < ApplicationPolicy
     @user = user
     @wiki = wiki
   end
-#
-#   def update?
-#     if @user.admin? || @wiki.user == @user
-#       allow_private = true
-#     else
-#       block_private = true
-#     end
-#   end
-# end
 
   def destroy?
     user.admin? || @wiki.user == @user

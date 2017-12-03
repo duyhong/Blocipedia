@@ -42,7 +42,8 @@ class WikisController < ApplicationController
      # @wiki.assign_attributes(wiki_params)
 
      # if @wiki.save
-     if @wiki.update_attributes(wiki_params)
+     # if @wiki.update_attributes(wiki_params)
+     if @wiki.update_attributes(permitted_attributes(@wiki))
        flash[:notice] = "Wiki was updated."
        redirect_to @wiki
      else
@@ -72,14 +73,14 @@ class WikisController < ApplicationController
      params.require(:wiki).permit(:title, :body, :private)
    end
 
-   def wiki_params
-     params.require(:wiki).permit(policy(@wiki).permitted_attributes)
-   end
+   # def wiki_params
+   #   params.require(:wiki).permit(policy(@wiki).permitted_attributes)
+   # end
 
     def user_not_authorized(exception)
       wiki_policy = exception.policy.class.to_s.underscore
 
-      flash[:error] = t "#{wiki_policy}.#{exception.query}", scope: "pundit", default: :default
+      flash[:alert] = "You're not authorized to do that!"
       redirect_to(request.referrer || root_path)
     end
 
