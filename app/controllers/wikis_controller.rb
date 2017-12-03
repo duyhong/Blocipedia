@@ -80,7 +80,7 @@ class WikisController < ApplicationController
     def user_not_authorized(exception)
       wiki_policy = exception.policy.class.to_s.underscore
 
-      flash[:alert] = "You're not authorized to do that!"
+      flash[:alert] = "You are not authorized to do that!"
       redirect_to(request.referrer || root_path)
     end
 

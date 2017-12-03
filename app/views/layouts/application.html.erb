@@ -18,14 +18,14 @@
      <% end %>
 
   <% if flash[:notice] %>
-    <div class="notice"><%= flash[:notice] %></div>
+    <!-- <div class="notice"><%= flash[:notice] %></div> -->
     <script>
       alert("<%= flash[:notice] %>");
     </script>
   <% end %>
 
   <% if flash[:alert] %>
-    <div class="alert"><%= flash[:alert].html_safe %></div>
+    <!-- <div class="alert"><%= flash[:alert].html_safe %></div> -->
     <script>
       alert("<%= flash[:alert] %>");
     </script>
