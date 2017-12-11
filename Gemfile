@@ -52,6 +52,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'pry-rails'
   gem 'mailcatcher'
+  gem 'stripe'
 end
 
 group :development do
