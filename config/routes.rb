@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   resources :wikis  # , except: [:index]
 
+  put '/users/:id/downgrade', to: 'users#downgrade', as: :downgrade
+
   get 'about' => 'welcome#about'
 
   root 'welcome#index'

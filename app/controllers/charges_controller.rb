@@ -45,11 +45,3 @@ class ChargesController < ApplicationController
 
   end
 end
-
-# <!-- <%= form_for current_user do |f| %>
-#  <div class="field">
-#    <%= f.label :role %>
-#    <%= f.select :role, User.roles.keys, {}, class: 'user-roles-select' %>
-#    <%= f.submit "Change role" %>
-#  </div>
-# <% end %> -->

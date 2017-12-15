@@ -36,11 +36,7 @@
   </div>
 <% end %>
 
-<% if current_user.standard?%>
-  <%= link_to 'Change role to Premium', new_charge_path, :class => 'navbar-link' %>
-<% else %>
-    <%= link_to 'Change role to Standard', downgrade_path(current_user), method: :put, :class => 'navbar-link' %>
-<% end %>
+<%= link_to 'Change role to Premium', new_charge_path, :class => 'navbar-link' %>
 
 <h3>Cancel my account</h3>
 
