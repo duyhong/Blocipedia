@@ -39,7 +39,7 @@
 <% if current_user.standard?%>
   <%= link_to 'Change role to Premium', new_charge_path, :class => 'navbar-link' %>
 <% else %>
-    <%= link_to 'Change role to Standard', downgrade_path(current_user), method: :put, :class => 'navbar-link' %>
+  <%= link_to 'Change role to Standard', downgrade_path(current_user), data: {confirm: "Your private wikis will become public after you downgrade your account. Are you sure?"}, method: :put, :class => 'navbar-link' %>
 <% end %>
 
 <h3>Cancel my account</h3>
