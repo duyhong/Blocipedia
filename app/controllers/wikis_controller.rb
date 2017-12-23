@@ -70,7 +70,7 @@ class WikisController < ApplicationController
    private
 
    def params_for_create
-     if current_user.premium?
+     if current_user.premium? || current_user.admin?
        params.require(:wiki).permit(:title, :body, :private)
      else
        params.require(:wiki).permit(:title, :body)

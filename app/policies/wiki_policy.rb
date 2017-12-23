@@ -9,7 +9,7 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    if user.admin? || @wiki.user == @user   # user.owner_of?(@wiki)
+    if user.admin? || user.premium? # @wiki.user == @user   # user.owner_of?(@wiki)
       [:title, :body, :private]
     else
       [:title, :body]
