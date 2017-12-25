@@ -24,6 +24,7 @@ gem 'bootstrap'
 gem 'figaro'
 gem 'devise'
 gem 'pundit'
+gem 'redcarpet'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
