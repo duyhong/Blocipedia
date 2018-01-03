@@ -3,7 +3,7 @@ class WikisController < ApplicationController
   # before_action :authorize_user, except: [:show, :new, :create]
 
   def index
-     @wikis = Wiki.all
+     @wikis = policy_scope(Wiki)
   end
 
   def show
@@ -34,13 +34,43 @@ class WikisController < ApplicationController
 
    def edit
      @wiki = Wiki.find(params[:id])
+     # @potential_collaborators -> all users except current user and existing collaborators
+     @potential_collaborators = [] # In _form.html.erb,
+                                   # use @potential_collaborators to populate a select list,
+                                   # value of option in select tag to be the user id,
+                                   # select called collaborator_id
+     @existing_collaborators = []
+     users = User.all
+     users.each do |user|
+       if current_user != user  # && !@wiki.collaborators.include?(user)
+         exist = false
+         @wiki.collaborators.each do |collaborator|
+           # @existing_collaborators << User.find(collaborator.user_id)
+           if collaborator.user_id == user.id
+             exist = true
+             @existing_collaborators << user
+             break
+           end
+         end
+         if exist == false
+           @potential_collaborators << user
+         else
+           exist == false
+         end
+       end
+     end
+
    end
 
    def update
-     @wiki = Wiki.find(params[:id])
-     # authorize @wiki
-     # @wiki.assign_attributes(wiki_params)
+     @wiki = Wiki.find(params[:id])     # authorize @wiki
+     if params[:wiki][:selected_option].present?
+       @user = User.find(params[:wiki][:selected_option])
+       Collaborator.create!(wiki: @wiki, user: @user, created_at: Time.now)
+     end
+     @wiki.collaborators.where(user_id: params[:wiki][:removed_collaborator]).destroy_all
 
+     # @wiki.assign_attributes(wiki_params)
      # if @wiki.save
      # if @wiki.update_attributes(wiki_params)
      if @wiki.update_attributes(permitted_attributes(@wiki))
@@ -76,6 +106,10 @@ class WikisController < ApplicationController
        params.require(:wiki).permit(:title, :body)
      end
    end
+
+   # def collaborator_params
+   #   params.require(:collaborator).permit(:wiki_id, :user_id)
+   # end
 
    # def wiki_params
    #   params.require(:wiki).permit(policy(@wiki).permitted_attributes)

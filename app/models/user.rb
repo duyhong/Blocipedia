@@ -11,6 +11,18 @@ class User < ApplicationRecord
 
   enum role: [:standard, :premium, :admin]
 
+  has_many :collaborators
+  has_many :wikis, through: :collaborators
+
+  # def collaborators
+  #    Collaborator.where(user_id: id)
+  # end
+  #
+  # delegate :wikis, to: :collaborators
+  # def wikis
+  #    collaborators.wikis
+  # end
+
   private
 
   def send_new_user_emails
