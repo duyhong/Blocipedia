@@ -42,24 +42,14 @@ class WikisController < ApplicationController
      @existing_collaborators = []
      users = User.all
      users.each do |user|
-       if current_user != user  # && !@wiki.collaborators.include?(user)
-         exist = false
-         @wiki.collaborators.each do |collaborator|
-           # @existing_collaborators << User.find(collaborator.user_id)
-           if collaborator.user_id == user.id
-             exist = true
+       if current_user != user
+          if @wiki.users.include?(user)
              @existing_collaborators << user
-             break
-           end
-         end
-         if exist == false
-           @potential_collaborators << user
-         else
-           exist == false
-         end
+          else
+             @potential_collaborators << user
+          end
        end
      end
-
    end
 
    def update

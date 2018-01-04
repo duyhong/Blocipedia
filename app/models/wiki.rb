@@ -1,4 +1,6 @@
 class Wiki < ApplicationRecord
+  attr_accessor :selected_option, :removed_collaborator
+
   belongs_to :user
 
   has_many :collaborators
