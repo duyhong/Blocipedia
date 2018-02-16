@@ -2,6 +2,19 @@
 
  An application that allows users to create public and private Markdown-based [wikis](http://en.wikipedia.org/wiki/Wiki) as well as share them publicly or privately with other collaborators.
 
+## Features
+..* User Sign Up: incorporate [Devise](https://github.com/plataformatec/devise) gem for authentication. Blocipedia's authentication system should allow users to sign up and send emails for account confirmation.
+
+..* User Sign in and Out
+
+..* Wiki CRUD: a user with a standard account can *create*, *read*, *update*, and *delete* public wikis
+
+..* User Roles: use the [Pundit](https://github.com/elabs/pundit) gem for authorization. Users should have one of three roles: standard (free), premium, or admin. Refer to the [Pundit Readme](https://github.com/elabs/pundit/blob/master/README.md#policies) checkpoint for examples of using Pundit policies.
+..* Upgrading an Account: Use [Stripe](https://stripe.com/) to charge users before switching their account role from standard to premium.
+..* Downgrade Account Back to Standard: private wikis will become public.
+..* Implement Privacy Controls: Premium and admin users should be able to create new private wikis and make public wikis private.
+..* Markdown: Use the [Redcarpet](https://github.com/vmg/redcarpet) gem to parse Markdown syntax.
+
  ![Blocipedia Wikis](../master/screenshots/blocipedia_wikis.png)
 
 ## Configuration
