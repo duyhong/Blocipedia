@@ -2,6 +2,8 @@
 
  An application that allows users to create public and private Markdown-based [wikis](http://en.wikipedia.org/wiki/Wiki) as well as share them publicly or privately with other collaborators.
 
+![Blocipedia Wikis](../master/screenshots/blocipedia_wikis.png)
+
 ## Features
 * User Sign Up: incorporate [Devise](https://github.com/plataformatec/devise) gem for authentication. Blocipedia's authentication system should allow users to sign up and send emails for account confirmation.
 
@@ -18,8 +20,6 @@
 * Implement Privacy Controls: Premium and admin users should be able to create new private wikis and make public wikis private.
 
 * Markdown: Use the [Redcarpet](https://github.com/vmg/redcarpet) gem to parse Markdown syntax.
-
- ![Blocipedia Wikis](../master/screenshots/blocipedia_wikis.png)
 
 ## Configuration
 ### Mac and Linux Users
