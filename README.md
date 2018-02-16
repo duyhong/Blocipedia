@@ -21,6 +21,8 @@
 
 * Markdown: Use the [Redcarpet](https://github.com/vmg/redcarpet) gem to parse Markdown syntax.
 
+* Wiki Collaborators: add and remove collaborators for my private wikis.
+
 ## Configuration
 ### Mac and Linux Users
 
